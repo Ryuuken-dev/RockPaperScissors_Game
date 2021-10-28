@@ -1,20 +1,26 @@
 from random import choice
 
-#Użycie dziedziczenia z klasy View
 
 class GameEngine:
-    def __init__(self, number_of_games: int, users_input: str):
-        self.users_input = users_input
-        self.number_of_games = number_of_games
+    def __init__(self,):
         self.ai_choice = ''
+        self.user_score = 0
+        self.computer_score = 0
 
     def computer_choice(self):
         self.ai_choice = choice(["Rock", "Paper", "Scissors"])
 
-    def get_result(self):
-        if self.users_input == self.ai_choice:
+    def who_win(self, usr_choice: str):
+        if usr_choice == self.ai_choice:
             return "Draw"
-        elif self.users_input == "Rock" and self.ai_choice == "Scissors" or self.users_input == "Paper" and self.ai_choice == "Rock" or self.users_input == "Scissors" and self.ai_choice == "Paper":
+        elif usr_choice == "Rock" and self.ai_choice == "Scissors" or usr_choice == "Paper" and self.ai_choice == "Rock" or usr_choice == "Scissors" and self.ai_choice == "Paper":
+            self.user_score += 1
             return "You win!"
-        elif self.users_input == "Rock" and self.ai_choice == "Paper" or self.users_input == "Paper" and self.ai_choice == "Scissors" or self.users_input == "Scissors" and self.ai_choice == "Rock":
+        elif usr_choice == "Rock" and self.ai_choice == "Paper" or usr_choice == "Paper" and self.ai_choice == "Scissors" or usr_choice == "Scissors" and self.ai_choice == "Rock":
+            self.computer_score += 1
             return "You lose"
+
+    def get_results(self):
+        return self.user_score, self.computer_score
+
+
